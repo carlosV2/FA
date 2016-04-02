@@ -1,0 +1,15 @@
+{
+    "autoload": {
+        "psr-4": {
+            "carlosV2\\NFA\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\carlosV2\\NFA\\": "spec/"
+        }
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.5"
+    }
+}
