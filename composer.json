@@ -1,4 +1,15 @@
 {
+    "name": "carlosv2/nfa",
+    "type": "library",
+    "description": "Nondeterministic finite automaton",
+    "keywords": ["NFA", "Nondeterministic", "Automaton"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carlos Ortega",
+            "email": "carlosV2.0@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "carlosV2\\NFA\\": ["src/", "features/bootstrap/"]
@@ -9,8 +20,16 @@
             "spec\\carlosV2\\NFA\\": "spec/"
         }
     },
+    "require": {
+        "php": ">=5.5,<7.1"
+    },
     "require-dev": {
         "phpspec/phpspec": "^2.5",
         "behat/behat": "^3.1"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
