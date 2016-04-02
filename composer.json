@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "carlosV2\\NFA\\": "src/"
+            "carlosV2\\NFA\\": ["src/", "features/bootstrap/"]
         }
     },
     "autoload-dev": {
