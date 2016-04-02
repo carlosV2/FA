@@ -8,6 +8,9 @@ class EpsilonSymbol implements Symbol
     {
     }
 
+    /**
+     * @return EpsilonSymbol
+     */
     public static function create()
     {
         return new self();
