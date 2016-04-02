@@ -1,0 +1,4 @@
+suites:
+  nfa_suite:
+    namespace: carlosV2\NFA
+    psr4_prefix: carlosV2\NFA
