@@ -20,7 +20,7 @@ class StateSpec extends ObjectBehavior
         $this->shouldBeFinal();
     }
 
-    function it_cretes_a_transition_on_an_output_symbol(Symbol $symbol)
+    function it_creates_a_transition_on_an_output_symbol(Symbol $symbol)
     {
         $this->on($symbol)->shouldBeAnInstanceOf(Transition::class);
     }
@@ -37,5 +37,18 @@ class StateSpec extends ObjectBehavior
         $this->on($symbol1)->visit($state3);
 
         $this->getReachableStatesBySymbol($symbol1)->shouldReturn([$state1, $state3]);
+    }
+
+    function it_returns_empty_array_if_a_transition_is_not_defined(Symbol $symbol1, Symbol $symbol2, State $state1, State $state3)
+    {
+        $symbol1->matches($symbol1)->willReturn(true);
+        $symbol1->matches($symbol2)->willReturn(false);
+        $symbol2->matches($symbol1)->willReturn(false);
+        $symbol2->matches($symbol2)->willReturn(true);
+
+        $this->on($symbol1)->visit($state1);
+        $this->on($symbol1)->visit($state3);
+
+        $this->getReachableStatesBySymbol($symbol2)->shouldReturn([]);
     }
 }
