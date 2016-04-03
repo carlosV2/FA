@@ -3,6 +3,7 @@
 namespace spec\carlosV2\FA\NFA;
 
 use carlosV2\FA\FA;
+use carlosV2\FA\NFA\EpsilonSymbol;
 use carlosV2\FA\NFA\State;
 use carlosV2\FA\Symbol;
 use PhpSpec\ObjectBehavior;
@@ -19,9 +20,11 @@ class NFASpec extends ObjectBehavior
     {
         $state1->isFinal()->willReturn(true);
         $state2->isFinal()->willReturn(true);
-        
-        $state1->getReachableStatesBySymbol(Argument::type(Symbol::class))->willReturn([$state2]);
-        $state2->getReachableStatesBySymbol(Argument::type(Symbol::class))->willReturn([$state1]);
+
+        $state1->getReachableStatesBySymbol(Argument::type(EpsilonSymbol::class))->willReturn([$state2]);
+        $state1->getReachableStatesBySymbol($symbol)->willReturn([$state2]);
+        $state2->getReachableStatesBySymbol(Argument::type(EpsilonSymbol::class))->willReturn([$state1]);
+        $state2->getReachableStatesBySymbol($symbol)->willReturn([$state1]);
 
         $this->addStartingState($state1);
         $this->addStartingState($state2);
