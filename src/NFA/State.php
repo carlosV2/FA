@@ -40,10 +40,9 @@ class State
      */
     public function on(Symbol $symbol)
     {
-        $transition = new Transition($symbol);
-        $this->transitions[] = $transition;
+        $this->transitions[] = new Transition($symbol);
 
-        return $transition;
+        return end($this->transitions);
     }
 
     /**
