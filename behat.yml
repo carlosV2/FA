@@ -1,6 +1,6 @@
 default:
     suites:
-        default:
-            paths: [ '%paths.base%/features/' ]
+        nfa:
+            paths: [ '%paths.base%/features/nfa/' ]
             contexts:
-                - carlosV2\FA\FeatureContext
+                - carlosV2\FA\NFAContext
