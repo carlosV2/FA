@@ -1,8 +1,8 @@
 <?php
 
-namespace carlosV2\NFA;
+namespace carlosV2\FA;
 
-use carlosV2\NFA\Symbol;
+use carlosV2\FA\Symbol;
 
 class CharSymbol implements Symbol
 {

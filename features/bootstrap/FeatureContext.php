@@ -1,6 +1,6 @@
 <?php
 
-namespace carlosV2\NFA;
+namespace carlosV2\FA;
 
 use Behat\Behat\Context\Context;
 

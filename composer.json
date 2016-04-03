@@ -1,8 +1,8 @@
 {
-    "name": "carlosv2/nfa",
+    "name": "carlosv2/fa",
     "type": "library",
     "description": "Nondeterministic finite automaton",
-    "keywords": ["NFA", "Nondeterministic", "Automaton"],
+    "keywords": ["NFA", "DFA", "Nondeterministic", "Deterministic", "Automaton", "Automata"],
     "license": "MIT",
     "authors": [
         {
@@ -12,12 +12,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "carlosV2\\NFA\\": ["src/", "features/bootstrap/"]
+            "carlosV2\\FA\\": ["src/", "features/bootstrap/"]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\carlosV2\\NFA\\": "spec/"
+            "spec\\carlosV2\\FA\\": "spec/"
         }
     },
     "require": {

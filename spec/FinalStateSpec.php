@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\carlosV2\NFA;
+namespace spec\carlosV2\FA;
 
-use carlosV2\NFA\State;
+use carlosV2\FA\State;
 use PhpSpec\ObjectBehavior;
 
 class FinalStateSpec extends ObjectBehavior

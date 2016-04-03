@@ -1,4 +1,4 @@
 suites:
-  nfa_suite:
-    namespace: carlosV2\NFA
-    psr4_prefix: carlosV2\NFA
+  fa_suite:
+    namespace: carlosV2\FA
+    psr4_prefix: carlosV2\FA

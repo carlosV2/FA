@@ -3,4 +3,4 @@ default:
         default:
             paths: [ '%paths.base%/features/' ]
             contexts:
-                - carlosV2\NFA\FeatureContext
+                - carlosV2\FA\FeatureContext

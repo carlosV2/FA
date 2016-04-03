@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\carlosV2\NFA;
+namespace spec\carlosV2\FA;
 
-use carlosV2\NFA\State;
-use carlosV2\NFA\Symbol;
-use carlosV2\NFA\Transition;
+use carlosV2\FA\State;
+use carlosV2\FA\Symbol;
+use carlosV2\FA\Transition;
 use PhpSpec\ObjectBehavior;
 
 class StateSpec extends ObjectBehavior
