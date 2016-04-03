@@ -3,6 +3,9 @@
 namespace carlosV2\FA;
 
 use Behat\Behat\Context\Context;
+use carlosV2\FA\NFA\EpsilonSymbol;
+use carlosV2\FA\NFA\NFA;
+use carlosV2\FA\NFA\State;
 
 class FeatureContext implements Context
 {

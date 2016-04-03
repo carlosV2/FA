@@ -2,8 +2,8 @@
 
 namespace spec\carlosV2\FA;
 
-use carlosV2\FA\State;
-use carlosV2\FA\Symbol;
+use carlosV2\FA\NFA\State;
+use carlosV2\FA\NFA\Symbol;
 use PhpSpec\ObjectBehavior;
 
 class TransitionSpec extends ObjectBehavior

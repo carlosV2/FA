@@ -1,6 +1,8 @@
 <?php
 
-namespace carlosV2\FA;
+namespace carlosV2\FA\NFA;
+
+use carlosV2\FA\Symbol;
 
 class Transition
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\carlosV2\FA;
+namespace spec\carlosV2\FA\NFA;
 
-use carlosV2\FA\EpsilonSymbol;
+use carlosV2\FA\NFA\EpsilonSymbol;
 use carlosV2\FA\Symbol;
 use PhpSpec\ObjectBehavior;
 
