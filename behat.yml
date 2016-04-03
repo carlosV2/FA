@@ -4,3 +4,7 @@ default:
             paths: [ '%paths.base%/features/nfa/' ]
             contexts:
                 - carlosV2\FA\NFAContext
+        dfa:
+            paths: [ '%paths.base%/features/dfa/' ]
+            contexts:
+                - carlosV2\FA\DFAContext

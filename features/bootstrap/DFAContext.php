@@ -3,11 +3,11 @@
 namespace carlosV2\FA;
 
 use Behat\Behat\Context\Context;
-use carlosV2\FA\NFA\EpsilonSymbol;
-use carlosV2\FA\NFA\NFA;
-use carlosV2\FA\NFA\State;
+use carlosV2\FA\DFA\DFA;
+use carlosV2\FA\DFA\State;
+use carlosV2\FA\Exception\TransitionAlreadyDefinedException;
 
-class NFAContext implements Context
+class DFAContext implements Context
 {
     use InputManagerTrait;
 
@@ -64,17 +64,6 @@ class NFAContext implements Context
     }
 
     /**
-     * @Given there is an epsilon jump from the state :fromState to the state :toState
-     *
-     * @param string $fromState
-     * @param string $toState
-     */
-    public function thereIsAnEpsilonJumpFromTheStateToTheState($fromState, $toState)
-    {
-        $this->states[$fromState]->on(EpsilonSymbol::create())->visit($this->states[$toState]);
-    }
-
-    /**
      * @Given there is a jump through the symbol :symbol from the state :fromState to the state :toState
      *
      * @param string $symbol
@@ -85,18 +74,13 @@ class NFAContext implements Context
     {
         $this->states[$fromState]->on(new CharSymbol($symbol))->visit($this->states[$toState]);
     }
-    
+
     /**
      * @When I run the automaton
      */
     public function iRunTheAutomaton()
     {
-        $nfa = new NFA();
-        foreach ($this->startingStates as $state) {
-            $nfa->addStartingState($state);
-        }
-
-        $this->result = $nfa->run($this->input);
+        $this->result = (new DFA($this->startingStates[0]))->run($this->input);
     }
 
     /**
@@ -108,7 +92,7 @@ class NFAContext implements Context
             throw new \LogicException("The input was rejected but it shouldn't.");
         }
     }
-    
+
     /**
      * @Then it should reject the input
      */
@@ -116,6 +100,34 @@ class NFAContext implements Context
     {
         if ($this->result) {
             throw new \LogicException("The input was accepted but it shouldn't.");
+        }
+    }
+
+    /**
+     * @When I add a transition through the symbol :symbol from the state :fromState to the state :toState
+     *
+     * @param string $symbol
+     * @param string $fromState
+     * @param string $toState
+     */
+    public function iAddATransitionThroughTheSymbolFromTheStateToTheState($symbol, $fromState, $toState)
+    {
+        try {
+            $this->thereIsAJumpThroughTheSymbolFromTheStateToTheState($symbol, $fromState, $toState);
+
+            $this->result = false;
+        } catch (TransitionAlreadyDefinedException $e) {
+            $this->result = true;
+        }
+    }
+
+    /**
+     * @Then it should prevent this addition
+     */
+    public function itShouldPreventThisAddition()
+    {
+        if (!$this->result) {
+            throw new \LogicException('The transition was added but this was not expected.');
         }
     }
 }
