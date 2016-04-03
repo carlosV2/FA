@@ -9,9 +9,15 @@ use PhpSpec\ObjectBehavior;
 
 class StateSpec extends ObjectBehavior
 {
-    function it_is_not_a_final_state()
+    function it_is_not_final_by_default()
     {
         $this->shouldNotBeFinal();
+    }
+
+    function it_can_be_created_as_a_final_state()
+    {
+        $this->beConstructedWith(true);
+        $this->shouldBeFinal();
     }
 
     function it_cretes_a_transition_on_an_output_symbol(Symbol $symbol)

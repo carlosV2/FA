@@ -5,12 +5,21 @@ namespace carlosV2\FA;
 class State
 {
     /**
+     * @var bool
+     */
+    private $final;
+
+    /**
      * @var Transition[]
      */
     private $transitions;
 
-    public function __construct()
+    /**
+     * @param bool $final
+     */
+    public function __construct($final = false)
     {
+        $this->final = $final;
         $this->transitions = [];
     }
 
@@ -19,7 +28,7 @@ class State
      */
     public function isFinal()
     {
-        return false;
+        return $this->final;
     }
 
     /**

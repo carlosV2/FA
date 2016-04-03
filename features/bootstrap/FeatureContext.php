@@ -60,7 +60,7 @@ class FeatureContext implements Context
      */
     public function thereIsTheFinalState($state)
     {
-        $this->states[$state] = new FinalState();
+        $this->states[$state] = new State(true);
     }
 
     /**
