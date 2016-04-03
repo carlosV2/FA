@@ -2,9 +2,10 @@
 
 namespace carlosV2\FA\NFA;
 
+use carlosV2\FA\FA;
 use carlosV2\FA\Symbol;
 
-class NFA
+class NFA implements FA
 {
     /**
      * @var State[]
@@ -25,9 +26,7 @@ class NFA
     }
 
     /**
-     * @param Symbol[] $symbols
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function run(array $symbols)
     {
