@@ -79,6 +79,7 @@ class Closure
 
         $this->states[] = $state;
     }
+    
     /**
      * @param State[] $states
      *
