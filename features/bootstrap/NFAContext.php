@@ -78,13 +78,13 @@ class NFAContext implements Context
     }
 
     /**
-     * @Given there is a jump though the symbol :symbol from the state :fromState to the state :toState
+     * @Given there is a jump through the symbol :symbol from the state :fromState to the state :toState
      *
      * @param string $symbol
      * @param string $fromState
      * @param string $toState
      */
-    public function thereIsAJumpThoughTheSymbolFromTheStateToTheState($symbol, $fromState, $toState)
+    public function thereIsAJumpThroughTheSymbolFromTheStateToTheState($symbol, $fromState, $toState)
     {
         $this->states[$fromState]->on(new CharSymbol($symbol))->visit($this->states[$toState]);
     }
