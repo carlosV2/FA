@@ -2,6 +2,7 @@
 
 namespace spec\carlosV2\FA\NFA;
 
+use carlosV2\FA\NFA\EpsilonSymbol;
 use carlosV2\FA\NFA\State;
 use carlosV2\FA\Symbol;
 use carlosV2\FA\NFA\Transition;
@@ -52,13 +53,14 @@ class StateSpec extends ObjectBehavior
         $this->getReachableStatesBySymbol($symbol2)->shouldReturn([]);
     }
 
-    function it_returns_all_the_reachable_symbols(Symbol $symbol1, Symbol $symbol2)
+    function it_returns_all_the_reachable_symbols_once_except_Epsilon(Symbol $symbol1, Symbol $symbol2)
     {
         $symbol1->matches($symbol1)->willReturn(true);
         $symbol1->matches($symbol2)->willReturn(false);
         $symbol2->matches($symbol1)->willReturn(false);
         $symbol2->matches($symbol2)->willReturn(true);
 
+        $this->on(EpsilonSymbol::create());
         $this->on($symbol1);
         $this->on($symbol2);
         $this->on($symbol1);

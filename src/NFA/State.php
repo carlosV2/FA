@@ -67,10 +67,10 @@ class State
      */
     public function getReachableSymbols()
     {
-        $symbols = [];
+        $symbols = [EpsilonSymbol::create()];
         foreach ($this->transitions as $transition) {
             foreach ($symbols as $symbol) {
-                if ($transition->getSymbol()->matches($symbol)) {
+                if ($symbol->matches($transition->getSymbol())) {
                     continue 2;
                 }
             }
@@ -78,6 +78,6 @@ class State
             $symbols[] = $transition->getSymbol();
         }
 
-        return $symbols;
+        return array_slice($symbols, 1);
     }
 }
