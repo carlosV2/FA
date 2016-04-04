@@ -4,6 +4,8 @@ namespace spec\carlosV2\FA\DFA;
 
 use carlosV2\FA\DFA\State;
 use carlosV2\FA\FA;
+use carlosV2\FA\NFA\NFA;
+use carlosV2\FA\DFA\Transition;
 use carlosV2\FA\Symbol;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -27,5 +29,16 @@ class DFASpec extends ObjectBehavior
         $state->getReachableStateBySymbol($symbol)->willReturn($otherState);
 
         $this->run([$symbol])->shouldReturn(true);
+    }
+
+    function it_reverses_the_automata(State $state, Transition $transition, Symbol $symbol)
+    {
+        $state->isFinal()->willReturn(true);
+        $state->getTransitions()->willReturn($transition);
+
+        $transition->getSymbol()->willReturn($symbol);
+        $transition->getState()->willReturn($state);
+
+        $this->reverse()->shouldBeAnInstanceOf(NFA::class);
     }
 }
