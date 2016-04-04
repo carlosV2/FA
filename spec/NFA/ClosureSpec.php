@@ -50,4 +50,25 @@ class ClosureSpec extends ObjectBehavior
 
         $this->advance($symbol)->shouldBeAnInstanceOf(Closure::class);
     }
+
+    function it_returns_all_the_reachable_symbols(
+        State $state1,
+        State $state2,
+        State $state3,
+        State $state4,
+        Symbol $symbol1,
+        Symbol $symbol2
+    ) {
+        $symbol1->matches($symbol1)->willReturn(true);
+        $symbol1->matches($symbol2)->willReturn(false);
+        $symbol2->matches($symbol1)->willReturn(false);
+        $symbol2->matches($symbol2)->willReturn(true);
+
+        $state1->getReachableSymbols()->willReturn([$symbol1]);
+        $state2->getReachableSymbols()->willReturn([$symbol1, $symbol2]);
+        $state3->getReachableSymbols()->willReturn([$symbol2]);
+        $state4->getReachableSymbols()->willReturn([]);
+
+        $this->getReachableSymbols()->shouldReturn([$symbol1, $symbol2]);
+    }
 }

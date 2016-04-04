@@ -92,4 +92,25 @@ class Closure
 
         return $closure;
     }
+
+    /**
+     * @return Symbol[]
+     */
+    public function getReachableSymbols()
+    {
+        $symbols = [];
+        foreach ($this->states as $state) {
+            foreach ($state->getReachableSymbols() as $symbol) {
+                foreach ($symbols as $added) {
+                    if ($added->matches($symbol)) {
+                        continue 2;
+                    }
+                }
+
+                $symbols[] = $symbol;
+            }
+        }
+
+        return $symbols;
+    }
 }
