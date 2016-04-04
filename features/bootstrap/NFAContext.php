@@ -118,4 +118,17 @@ class NFAContext implements Context
             throw new \LogicException("The input was accepted but it shouldn't.");
         }
     }
+
+    /**
+     * @When I run the converted automaton
+     */
+    public function iRunTheConvertedAutomaton()
+    {
+        $nfa = new NFA();
+        foreach ($this->startingStates as $state) {
+            $nfa->addStartingState($state);
+        }
+
+        $this->result = $nfa->toDFA()->run($this->input);
+    }
 }
