@@ -26,6 +26,11 @@ class DFAContext implements Context
      */
     private $result;
 
+    /**
+     * @var DFA
+     */
+    private $automaton;
+
     public function __construct()
     {
         $this->startingStates = [];
@@ -156,5 +161,50 @@ class DFAContext implements Context
     public function iReverseAndRunTheAutomaton()
     {
         $this->result = (new DFA($this->startingStates[0]))->reverse()->run($this->input);
+    }
+
+    /**
+     * @When I minimize the automaton
+     */
+    public function iMinimizeTheAutomaton()
+    {
+        $this->automaton = BrzozowskiMinimizer::minimizeDFA(new DFA($this->startingStates[0]));
+    }
+
+    /**
+     * @Then the result has only :numberStates states
+     *
+     * @param integer $numberStates
+     */
+    public function theResultHasOnlyStates($numberStates)
+    {
+        $property = new \ReflectionProperty($this->automaton, 'state');
+        $property->setAccessible(true);
+        $state = $property->getValue($this->automaton);
+
+        $states = [spl_object_hash($state) => $state];
+        for ($i = 0; $i < count($states); $i++) {
+            $key = array_keys($states)[$i];
+
+            foreach ($states[$key]->getTransitions() as $transition) {
+                $hash = spl_object_hash($transition->getState());
+
+                if (!array_key_exists($hash, $states)) {
+                    $states[$hash] = $transition->getState();
+                }
+            }
+        }
+
+        if ((integer) $numberStates !== count($states)) {
+            throw new \LogicException('There were found ' . count($states) . ' states.');
+        }
+    }
+
+    /**
+     * @When I run the minimized automaton
+     */
+    public function iRunTheMinimizedAutomaton()
+    {
+        $this->result = BrzozowskiMinimizer::minimizeDFA(new DFA($this->startingStates[0]))->run($this->input);
     }
 }
