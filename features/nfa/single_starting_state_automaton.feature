@@ -44,3 +44,13 @@ Feature: Single starting state automaton
     Given I have the input "abc"
     When I run the automaton
     Then it should reject the input
+
+  Scenario: It accepts the input "ab" after converting it to a DFA
+    Given I have the input "ab"
+    When I run the converted automaton
+    Then it should accept the input
+
+  Scenario: It accepts the input "ababab" after converting it to a DFA
+    Given I have the input "ababab"
+    When I run the converted automaton
+    Then it should accept the input

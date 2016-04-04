@@ -48,3 +48,13 @@ Feature: Multiple starting states automaton
     Given I have the input "aca"
     When I run the automaton
     Then it should reject the input
+
+  Scenario: It accepts the input "ac" after converting it to a DFA
+    Given I have the input "ac"
+    When I run the converted automaton
+    Then it should accept the input
+
+  Scenario: It accepts the input "bc" after converting it to a DFA
+    Given I have the input "ac"
+    When I run the converted automaton
+    Then it should accept the input
