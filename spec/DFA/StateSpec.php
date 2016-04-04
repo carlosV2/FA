@@ -59,4 +59,12 @@ class StateSpec extends ObjectBehavior
 
         $this->shouldThrow(TransitionNotDefinedException::class)->duringGetReachableStateBySymbol($symbol2);
     }
+
+    function it_exposes_the_transitions(Symbol $symbol1, Symbol $symbol2, State $state1, State $state2)
+    {
+        $this->on($symbol1);
+        $this->on($symbol2);
+
+        $this->getTransitions()->shouldHaveCount(2);
+    }
 }

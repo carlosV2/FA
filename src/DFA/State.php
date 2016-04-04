@@ -80,4 +80,12 @@ class State
 
         throw new TransitionNotDefinedException();
     }
+
+    /**
+     * @return Transition[]
+     */
+    public function getTransitions()
+    {
+        return $this->transitions;
+    }
 }
