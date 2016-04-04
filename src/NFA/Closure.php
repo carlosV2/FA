@@ -113,4 +113,39 @@ class Closure
 
         return $symbols;
     }
+
+    /**
+     * @param Closure $closure
+     *
+     * @return bool
+     */
+    public function isSameAs(Closure $closure)
+    {
+        if (count($this->states) !== count($closure->states)) {
+            return false;
+        }
+
+        $internals = $this->getHashedStates($this->states);
+        $externals = $this->getHashedStates($closure->states);
+
+        $diff1 = array_diff($internals, $externals);
+        $diff2 = array_diff($externals, $internals);
+
+        return (count($diff1) === 0 && count($diff2) === 0);
+    }
+
+    /**
+     * @param State[] $states
+     *
+     * @return array
+     */
+    private function getHashedStates(array $states)
+    {
+        $hashes = [];
+        foreach ($states as $state) {
+            $hashes[] = spl_object_hash($state);
+        }
+
+        return $hashes;
+    }
 }

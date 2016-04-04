@@ -71,4 +71,18 @@ class ClosureSpec extends ObjectBehavior
 
         $this->getReachableSymbols()->shouldReturn([$symbol1, $symbol2]);
     }
+
+    function it_returns_true_if_two_closures_have_the_same_states(State $state1, State $state2)
+    {
+        $closure = Closure::forStates([$state1->getWrappedObject(), $state2->getWrappedObject()]);
+
+        $this->shouldBeSameAs($closure);
+    }
+
+    function it_returns_false_if_two_closures_have_different_states(State $state1)
+    {
+        $closure = Closure::forStates([$state1->getWrappedObject()]);
+
+        $this->shouldNotBeSameAs($closure);
+    }
 }
