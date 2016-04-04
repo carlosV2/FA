@@ -2,6 +2,7 @@
 
 namespace spec\carlosV2\FA\NFA;
 
+use carlosV2\FA\DFA\DFA;
 use carlosV2\FA\FA;
 use carlosV2\FA\NFA\EpsilonSymbol;
 use carlosV2\FA\NFA\State;
@@ -29,5 +30,15 @@ class NFASpec extends ObjectBehavior
         $this->addStartingState($state1);
         $this->addStartingState($state2);
         $this->run([$symbol])->shouldReturn(true);
+    }
+
+    function it_can_be_converted_to_a_DFA(State $state, Symbol $symbol)
+    {
+        $state->getReachableStatesBySymbol(Argument::type(EpsilonSymbol::class))->willReturn([]);
+        $state->getReachableSymbols()->willReturn([]);
+        $state->isFinal()->willReturn(false);
+
+        $this->addStartingState($state);
+        $this->toDFA()->shouldBeAnInstanceOf(DFA::class);
     }
 }
