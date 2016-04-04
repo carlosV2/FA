@@ -61,4 +61,23 @@ class State
 
         return $states;
     }
+
+    /**
+     * @return Symbol[]
+     */
+    public function getReachableSymbols()
+    {
+        $symbols = [];
+        foreach ($this->transitions as $transition) {
+            foreach ($symbols as $symbol) {
+                if ($transition->getSymbol()->matches($symbol)) {
+                    continue 2;
+                }
+            }
+
+            $symbols[] = $transition->getSymbol();
+        }
+
+        return $symbols;
+    }
 }
