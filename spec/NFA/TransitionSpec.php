@@ -12,6 +12,11 @@ class TransitionSpec extends ObjectBehavior
     {
         $this->beConstructedWith($symbol);
     }
+
+    function it_exposes_the_symbol(Symbol $symbol)
+    {
+        $this->getSymbol()->shouldReturn($symbol);
+    }
     
     function it_grants_permission_to_a_symbol_if_the_symbol_matches_it(Symbol $symbol, Symbol $other)
     {

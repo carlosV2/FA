@@ -49,4 +49,12 @@ class Transition
     {
         return $this->state;
     }
+
+    /**
+     * @return Symbol
+     */
+    public function getSymbol()
+    {
+        return $this->symbol;
+    }
 }
