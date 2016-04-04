@@ -130,4 +130,31 @@ class DFAContext implements Context
             throw new \LogicException('The transition was added but this was not expected.');
         }
     }
+
+    /**
+     * @Given I have an automata that validates the text :text
+     * 
+     * @param string $text
+     */
+    public function iHaveAnAutomataThatValidatesTheText($text)
+    {
+        $state = new State();
+        $this->startingStates[] = $state;
+
+        $total = strlen($text);
+        for ($i = 0; $i < $total; $i++) {
+            $newState = new State($i === ($total - 1));
+            $state->on(new CharSymbol($text[$i]))->visit($newState);
+
+            $state = $newState;
+        }
+    }
+
+    /**
+     * @When I reverse and run the automaton
+     */
+    public function iReverseAndRunTheAutomaton()
+    {
+        $this->result = (new DFA($this->startingStates[0]))->reverse()->run($this->input);
+    }
 }
